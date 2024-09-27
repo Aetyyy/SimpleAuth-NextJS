@@ -52,6 +52,8 @@ model user {
   image         String?
   password      String?
   role          String    @default("user")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
   accounts      account[]
   sessions      session[]
   Product       product[]
