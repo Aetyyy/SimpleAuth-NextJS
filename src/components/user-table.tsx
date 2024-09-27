@@ -1,4 +1,5 @@
 import { getUsers } from "@/lib/data";
+import { formatDate } from "@/lib/utils";
 
 export default async function UserTable() {
   const users = await getUsers();
@@ -11,6 +12,7 @@ export default async function UserTable() {
           <th className="py-3 px-6 text-left text-sm">Name</th>
           <th className="py-3 px-6 text-left text-sm">Email</th>
           <th className="py-3 px-6 text-left text-sm">Role</th>
+          <th className="py-3 px-6 text-left text-sm">Created At</th>
         </tr>
       </thead>
       <tbody>
@@ -19,6 +21,7 @@ export default async function UserTable() {
             <td className="py-3 px-6">{user.name}</td>
             <td className="py-3 px-6">{user.email}</td>
             <td className="py-3 px-6">{user.role}</td>
+            <td className="py-3 px-6">{formatDate(user.createdAt.toString())}</td>
           </tr>
         ))}
       </tbody>
