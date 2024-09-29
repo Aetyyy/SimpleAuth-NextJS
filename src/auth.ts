@@ -62,6 +62,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (isLoggedIn && LoginRoutes.includes(nextUrl.pathname)) {
         return Response.redirect(new URL("/dashboard", nextUrl.origin));
       }
+
+      const isForgotPasswordPage =
+        nextUrl.pathname.startsWith("/forgot-password/");
+      if (isLoggedIn && isForgotPasswordPage) {
+        return Response.redirect(new URL("/dashboard", nextUrl.origin));
+      }
       return true;
     },
     jwt({ token, user }) {
