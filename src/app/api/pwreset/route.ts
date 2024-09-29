@@ -1,0 +1,75 @@
+// import { sendMail } from "@/lib/mailTransporter";
+import { prisma } from "@/lib/prisma";
+import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
+
+export async function POST(req: Response) {
+  console.log("API route hit");
+  const { email } = await req.json();
+
+  const username = process.env.NEXT_PUBLIC_BURNER_USERNAME;
+  const password = process.env.NEXT_PUBLIC_BURNER_PASSWORD;
+
+  const user = await prisma.user.findUnique({
+    where: {
+      email: email,
+    },
+  });
+
+  if (!user) {
+    return NextResponse.json(
+      { message: "User not found", status: 404 },
+      { status: 404 }
+    );
+  }
+
+  const token = await prisma.passwordToken.findFirst({
+    where: {
+      userId: user.id,
+    },
+  });
+
+  if (!token) {
+    return NextResponse.json(
+      { message: "Password reset token not found", status: 404 },
+      { status: 404 }
+    );
+  }
+  const link = `http://localhost:3000/forgot-password/${token.token}`;
+
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    tls: {
+      ciphers: "SSLv3",
+      rejectUnauthorized: false,
+    },
+
+    auth: {
+      user: username,
+      pass: password,
+    },
+  });
+
+  try {
+    const mail = await transporter.sendMail({
+      from: "Boren <borengamink@gmail.com>",
+      to: email,
+      subject: "Rixzen password reset link",
+      html: `<p>This is your link for change your password: <b>${link}</b></p>`,
+    });
+
+    console.log("Email sent: ", mail);
+
+    return NextResponse.json(
+      { message: "Success: email was sent", accepted: mail.accepted },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { message: "Failed: email was not sent something when wrong!" },
+      { status: 500 }
+    );
+  }
+}
