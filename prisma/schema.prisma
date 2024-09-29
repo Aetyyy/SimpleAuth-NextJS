@@ -45,20 +45,29 @@ model session {
 }
 
 model user {
-  id            String    @id @default(cuid())
-  name          String?   @unique
-  email         String?   @unique
-  emailVerified DateTime? @map("email_verified")
+  id            String          @id @default(cuid())
+  name          String?         @unique
+  email         String?         @unique
+  emailVerified DateTime?       @map("email_verified")
   image         String?
   password      String?
-  role          String    @default("user")
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  verifiedUser  Boolean         @default(false)
+  role          String          @default("user")
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
   accounts      account[]
   sessions      session[]
-  Product       product[]
+  product       product[]
+  passwordToken passwordToken[]
 
   @@map("users")
+}
+
+model passwordToken {
+  id     String @id @default(cuid())
+  token  String @unique
+  userId String
+  user   user   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model verificationToken {
