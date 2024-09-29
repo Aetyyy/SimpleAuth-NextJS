@@ -56,10 +56,8 @@ export async function POST(req: Response) {
       from: "Boren <borengamink@gmail.com>",
       to: email,
       subject: "Rixzen password reset link",
-      html: `<p>This is your link for change your password: <b>${link}</b></p>`,
+      html: `<p>This is your link for change your password: <a href="${link}">Click here</a></p>`,
     });
-
-    console.log("Email sent: ", mail);
 
     return NextResponse.json(
       { message: "Success: email was sent", accepted: mail.accepted },

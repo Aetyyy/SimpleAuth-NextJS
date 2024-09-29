@@ -31,8 +31,6 @@ export async function POST(req: Response) {
       html: "<p>This is your verification code for Rixzen: <b>123456</b></p>",
     });
 
-    console.log("Email sent: ", mail);
-
     return NextResponse.json(
       { message: "Success: email was sent", accepted: mail.accepted },
       { status: 200 }

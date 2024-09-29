@@ -175,12 +175,9 @@ export const resetPassword = async (previous: unknown, formData: FormData) => {
     await generateForgotPasswordToken(user.id);
 
     console.log("Password has been reset");
-    return {
-      message: "Password has been reset",
-      status: 200,
-    };
   } catch (error) {
     console.error("Error updating password:", error);
     return { message: "Gagal mereset password.", status: 500 };
   }
+  return redirect("/login");
 };
