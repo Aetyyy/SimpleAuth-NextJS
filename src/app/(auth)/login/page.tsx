@@ -6,11 +6,15 @@ export const metadata: Metadata = {
   title: "Sign In",
 };
 
-export default function LoginPage ({ searchParams }: { searchParams?: { error?: string } }) {
+export default function LoginPage({
+  searchParams,
+}: {
+  searchParams?: { error?: string };
+}) {
   const params = searchParams?.error;
 
   return (
-    <div className="p-6 space-y-4">
+    <div className="p-6 space-y-2">
       <h1 className="text-2xl font-bold text-gray-900">
         Sign In to your account
       </h1>
@@ -32,4 +36,4 @@ export default function LoginPage ({ searchParams }: { searchParams?: { error?: 
       <GithubButton />
     </div>
   );
-};
+}

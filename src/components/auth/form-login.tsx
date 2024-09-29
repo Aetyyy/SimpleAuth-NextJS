@@ -9,7 +9,7 @@ export default function FormLogin() {
   const [state, formAction] = useFormState(signInCredentials, null);
 
   return (
-    <form action={formAction} className="space-y-6">
+    <form action={formAction}>
       {state?.message ? (
         <div
           className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100"
@@ -37,7 +37,7 @@ export default function FormLogin() {
           </span>
         </div>
       </div>
-      <div>
+      <div className="my-4">
         <label
           htmlFor="password"
           className="block mb-2 text-sm font-medium text-gray-900"
@@ -57,6 +57,13 @@ export default function FormLogin() {
         </div>
       </div>
       <LoginButton />
+      <div className="mt-2 text-sm font-light text-gray-500">
+        <Link href={"/forgot-password"}>
+          <span className="font-medium text-blue-600 hover:text-blue-700">
+            Forgot Password?
+          </span>
+        </Link>
+      </div>
       <p className="text-sm font-light text-gray-500">
         Dont&apos;t have an account?
         <Link href={"/register"}>
