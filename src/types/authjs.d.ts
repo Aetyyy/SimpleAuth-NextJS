@@ -1,5 +1,5 @@
 import { type DefaultSession } from "next-auth";
-import { JWT } from "next-auth/jwt";
+import { JWT } from "next-auth/jwt"; // eslint-disable-line
 
 declare module "next-auth" {
   interface Session {
