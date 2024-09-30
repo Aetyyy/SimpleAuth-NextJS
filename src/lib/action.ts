@@ -106,9 +106,12 @@ export const forgotPassword = async (previous: unknown, formData: FormData) => {
       where: {
         email: email,
       },
+      include: {
+        accounts: true,
+      },
     });
 
-    if (!user) {
+    if (!user || (user.accounts && user.accounts.length > 0)) {
       return {
         message: "Email not found",
         status: 404,
