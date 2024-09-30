@@ -3,15 +3,10 @@
 import { forgotPassword } from "@/lib/action";
 import { ForgotPasswordButton } from "@/components/buttons";
 import { FormEvent, useState } from "react";
-
-type State = {
-  message: string;
-  status: number;
-  email?: undefined;
-};
+import { Email } from "@/types/forgot.i";
 
 export default function FormForgotPassword() {
-  const [state, setState] = useState<State>();
+  const [state, setState] = useState<Email>();
 
   const handleForm = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -20,9 +15,9 @@ export default function FormForgotPassword() {
 
     const data = await forgotPassword(null, formData);
     if (data.status === 404) {
-      setState(data as State);
+      setState(data as Email);
     } else if (data.status === 200) {
-      setState(data as State);
+      setState(data as Email);
       await fetch("/api/pwreset", {
         method: "POST",
         headers: {
