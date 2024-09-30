@@ -5,3 +5,9 @@ interface Email {
 }
 
 export type { Email };
+
+type ForgotPasswordButtonProps = {
+  isSubmitting: boolean;
+};
+
+export type { ForgotPasswordButtonProps };
