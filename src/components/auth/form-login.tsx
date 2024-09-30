@@ -57,14 +57,14 @@ export default function FormLogin() {
         </div>
       </div>
       <LoginButton />
-      <div className="mt-2 text-sm font-light text-gray-500">
+      <div className="mt-1 text-xs font-light text-gray-500">
         <Link href={"/forgot-password"}>
           <span className="font-medium text-blue-600 hover:text-blue-700">
             Forgot Password?
           </span>
         </Link>
       </div>
-      <p className="text-sm font-light text-gray-500">
+      <p className="mt-4 text-sm font-light text-gray-500">
         Dont&apos;t have an account?
         <Link href={"/register"}>
           <span className="font-medium pl-1 text-blue-600 hover:text-blue-700">
