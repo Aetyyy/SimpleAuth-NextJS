@@ -1,4 +1,5 @@
 "use client";
+import { ForgotPasswordButtonProps } from "@/types/forgot.i";
 import { useFormStatus } from "react-dom";
 
 export const RegisterButton = () => {
@@ -7,7 +8,7 @@ export const RegisterButton = () => {
     <button
       type="submit"
       disabled={pending}
-      className="w-full text-white bg-blue-700 font-medium rounded-lg px-5 py-2.5 text-center uppercase hover:bg-blue-800"
+      className="w-full text-white bg-blue-700 font-medium rounded-lg px-5 py-1.5 text-center uppercase hover:bg-blue-800"
     >
       {pending ? "Registering..." : "Register"}
     </button>
@@ -20,7 +21,7 @@ export const LoginButton = () => {
     <button
       type="submit"
       disabled={pending}
-      className="w-full text-white bg-blue-700 font-medium rounded-lg px-5 py-2.5 text-center uppercase hover:bg-blue-800"
+      className="w-full text-white bg-blue-700 font-medium rounded-lg px-5 py-1.5 text-center uppercase hover:bg-blue-800"
     >
       {pending ? "Logging in..." : "Login"}
     </button>
@@ -33,22 +34,23 @@ export const ResetPasswordButton = () => {
     <button
       type="submit"
       disabled={pending}
-      className="w-full text-white bg-blue-700 font-medium rounded-lg px-5 py-2.5 text-center uppercase hover:bg-blue-800"
+      className="w-full text-white bg-blue-700 font-medium rounded-lg px-5 py-1.5 text-center uppercase hover:bg-blue-800"
     >
       {pending ? "Resetting..." : "Confirm"}
     </button>
   );
 };
 
-export const ForgotPasswordButton = () => {
-  const { pending } = useFormStatus();
+export const ForgotPasswordButton = ({
+  isSubmitting,
+}: ForgotPasswordButtonProps) => {
   return (
     <button
       type="submit"
-      disabled={pending}
-      className="w-full text-white bg-blue-700 font-medium rounded-lg px-5 py-2.5 text-center uppercase hover:bg-blue-800"
+      disabled={isSubmitting}
+      className="w-full text-white bg-blue-700 font-medium rounded-lg px-5 py-1.5 text-center uppercase hover:bg-blue-800"
     >
-      {pending ? "Submitting..." : "Submit"}
+      {isSubmitting ? "Submitting..." : "Submit"}
     </button>
   );
 };
