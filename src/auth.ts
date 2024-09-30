@@ -52,8 +52,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
-      const ProtectedRoutes = ["/dashboard", "/user", "/product"];
-      const LoginRoutes = ["/login", "/register"];
+      const ProtectedRoutes = ["/user", "/product"];
+      const LoginRoutes = ["/login", "/register", "/forgot-password"];
 
       if (!isLoggedIn && ProtectedRoutes.includes(nextUrl.pathname)) {
         return Response.redirect(new URL("/login", nextUrl.origin));
@@ -65,18 +65,23 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
       const isForgotPasswordPage =
         nextUrl.pathname.startsWith("/forgot-password/");
+      nextUrl.pathname.startsWith("/reset-password/");
       if (isLoggedIn && isForgotPasswordPage) {
         return Response.redirect(new URL("/dashboard", nextUrl.origin));
       }
       return true;
     },
     jwt({ token, user }) {
-      if (user) token.role = user.role;
+      if (user) {
+        token.role = user.role;
+        token.verifiedUser = user.verifiedUser;
+      }
       return token;
     },
     session({ session, token }) {
       session.user.id = token.sub;
       session.user.role = token.role;
+      session.user.verifiedUser = token.verifiedUser;
       return session;
     },
   },
