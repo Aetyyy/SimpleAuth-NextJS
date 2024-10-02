@@ -2,17 +2,19 @@ import UserTable from "@/components/user-table";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "User Page",
-    description: "User Page",
-}
+  title: "User Page",
+  description: "User Page",
+};
 
 export default function UserPage() {
   return (
-    <div className="bg-slate-50 min-h-screen">
-        <div className="max-w-screen-md mx-auto py-10">
-            <h1 className="text-2xl font-bold">User List</h1>
-            <UserTable />
+    <div className="bg-slate-50 min-h-screen mt-20 overflow-hidden">
+      <div className="max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg mx-auto py-24">
+        <h1 className="text-2xl font-bold">User List</h1>
+        <div className="overflow-x-auto">
+          <UserTable />
         </div>
+      </div>
     </div>
-  )
+  );
 }
