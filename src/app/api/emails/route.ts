@@ -2,7 +2,7 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-export async function POST(req: Response) {
+export async function POST(req: Request) {
   console.log("API route hit");
   const { email } = await req.json();
 

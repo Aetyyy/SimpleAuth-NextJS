@@ -1,9 +1,8 @@
-// import { sendMail } from "@/lib/mailTransporter";
 import { prisma } from "@/lib/prisma";
-import { NextResponse } from "next/server";
+import { NextResponse as res } from "next/server";
 import nodemailer from "nodemailer";
 
-export async function POST(req: Response) {
+export async function POST(req: Request) {
   console.log("API route hit");
   const { email } = await req.json();
 
@@ -14,10 +13,13 @@ export async function POST(req: Response) {
     where: {
       email: email,
     },
+    include: {
+      accounts: true,
+    },
   });
 
-  if (!user) {
-    return NextResponse.json(
+  if (!user || (user.accounts && user.accounts.length > 0)) {
+    return res.json(
       { message: "User not found", status: 404 },
       { status: 404 }
     );
@@ -30,7 +32,7 @@ export async function POST(req: Response) {
   });
 
   if (!token) {
-    return NextResponse.json(
+    return res.json(
       { message: "Password reset token not found", status: 404 },
       { status: 404 }
     );
@@ -59,13 +61,13 @@ export async function POST(req: Response) {
       html: `<p>This is your link for change your password: <a href="${link}">Click here</a></p>`,
     });
 
-    return NextResponse.json(
+    return res.json(
       { message: "Success: email was sent", accepted: mail.accepted },
       { status: 200 }
     );
   } catch (error) {
     console.log(error);
-    return NextResponse.json(
+    return res.json(
       { message: "Failed: email was not sent something when wrong!" },
       { status: 500 }
     );
