@@ -93,13 +93,13 @@ export default async function Navbar() {
             <>
               <Link
                 href={"/login"}
-                className="bg-button-light text-white px-4 py-2 rounded-md hover:bg-button-hover"
+                className="bg-button-light text-white px-4 py-2 rounded-md hover:bg-button-hover transition-colors duration-500"
               >
                 Login
               </Link>
               <Link
                 href={"/register"}
-                className="bg-[#0056b3] text-white px-4 py-2 rounded-md hover:bg-button-light"
+                className="bg-[#0056b3] text-white px-4 py-2 rounded-md hover:bg-button-light transition-colors duration-500"
               >
                 Register
               </Link>
