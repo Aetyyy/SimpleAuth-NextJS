@@ -31,6 +31,18 @@ export const signUpCredentials = async (
   const hashPassword = hashSync(password, 12);
 
   try {
+    const existingUser = await prisma.user.findUnique({
+      where: { name },
+    });
+
+    if (existingUser) {
+      return {
+        error: {
+          name: ["This name is already taken"],
+        },
+      };
+    }
+
     const user = await prisma.user.create({
       data: {
         name,
@@ -41,6 +53,7 @@ export const signUpCredentials = async (
 
     await generateForgotPasswordToken(user.id);
   } catch (error) {
+    console.log(error);
     return { message: "Failed to register user" };
   }
   redirect("/login");
