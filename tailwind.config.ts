@@ -9,8 +9,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        theme: {
+          light: "#FFFFFF",
+        },
+        navbar: {
+          light: "#FFFFFF",
+          border: "#DEE2E6",
+          text: "#495057",
+          hover: {
+            text: "#74C0FC",
+          },
+        },
+        button: {
+          light: "#007BFF",
+          hover: "#74C0FC",
+        },
       },
     },
   },
