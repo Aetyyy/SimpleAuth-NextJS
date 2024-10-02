@@ -6,27 +6,44 @@ import React from "react";
 export default async function Navbar() {
   const session = await auth();
   return (
-    <nav className="bg-white border-gray-200 border-b">
-      <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4">
+    <nav className="bg-navbar-light border-b border-navbar-border fixed w-full top-0">
+      <div className="max-w-screen-xl flex items-center justify-between container mx-auto p-4">
         <Link href={"/"}>
           <Image src={"/logo.jpg"} alt="logo" width={50} height={50} priority />
         </Link>
         <div className="flex items-center gap-3">
-          <ul className="hidden md:flex items-center gap-4 mr-5 font-semibold text-gray-600 hover:text-gray-800">
+          <ul className="hidden md:flex items-center gap-4 mr-5 font-semibold text-navbar-text">
             <li>
-              <Link href={"/"}>Home</Link>
+              <Link href={"/"} className="hover:text-navbar-hover-text">
+                Home
+              </Link>
             </li>
             {session && (
               <>
                 <li>
-                  <Link href={"/product"}>Product</Link>
+                  <Link
+                    href={"/product"}
+                    className="hover:text-navbar-hover-text"
+                  >
+                    Product
+                  </Link>
                 </li>
                 <li>
-                  <Link href={"/dashboard"}>Dashboard</Link>
+                  <Link
+                    href={"/dashboard"}
+                    className="hover:text-navbar-hover-text"
+                  >
+                    Dashboard
+                  </Link>
                 </li>
                 {session.user.role === "admin" ? (
                   <li>
-                    <Link href={"/user"}>User</Link>
+                    <Link
+                      href={"/user"}
+                      className="hover:text-navbar-hover-text"
+                    >
+                      User
+                    </Link>
                   </li>
                 ) : null}
               </>
@@ -49,8 +66,10 @@ export default async function Navbar() {
                 <Image
                   src={session.user.image || "/avatar.png"}
                   alt="avatar"
-                  width={50}
-                  height={50}
+                  width={512}
+                  height={512}
+                  priority
+                  quality={100}
                   className="w-10 h-10 rounded-full"
                 />
               </button>
@@ -71,12 +90,20 @@ export default async function Navbar() {
               </button>
             </form>
           ) : (
-            <Link
-              href={"/login"}
-              className="bg-red-400 text-white px-4 py-2 rounded-md hover:bg-red-500"
-            >
-              Login
-            </Link>
+            <>
+              <Link
+                href={"/login"}
+                className="bg-button-light text-white px-4 py-2 rounded-md hover:bg-button-hover"
+              >
+                Login
+              </Link>
+              <Link
+                href={"/register"}
+                className="bg-[#0056b3] text-white px-4 py-2 rounded-md hover:bg-button-light"
+              >
+                Register
+              </Link>
+            </>
           )}
         </div>
       </div>
