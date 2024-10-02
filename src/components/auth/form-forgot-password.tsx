@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 
 export default function FormForgotPassword() {
-  const [state, setState] = useState<Email>();
+  const [state, setState] = useState<Email>(); // eslint-disable-line
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const router = useRouter();
 
@@ -65,6 +65,7 @@ export default function FormForgotPassword() {
         allowEscapeKey: false,
         allowEnterKey: false,
       });
+      console.log(error);
     } finally {
       setIsSubmitting(false);
     }
