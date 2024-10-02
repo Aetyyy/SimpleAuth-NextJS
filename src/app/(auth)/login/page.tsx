@@ -14,8 +14,8 @@ export default function LoginPage({
   const params = searchParams?.error;
 
   return (
-    <div className="p-6 space-y-2">
-      <h1 className="text-2xl font-bold text-gray-900">
+    <div className="p-6 space-y-2 overflow-hidden">
+      <h1 className="text-2xl font-bold text-black">
         Sign In to your account
       </h1>
       {params === "OAuthAccountNotLinked" ? (

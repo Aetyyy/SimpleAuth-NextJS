@@ -28,7 +28,7 @@ export default function FormRegister() {
         <input
           type="text"
           name="name"
-          className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2.5"
+          className="bg-white border border-[#CED4DA] hover:border-[#74C0FC] focus:border-[#74C0FC] outline-none transition-colors duration-300 text-[#6C757D] rounded-lg w-full p-2.5"
           placeholder="John Doe"
         />
         <div aria-live="polite" aria-atomic="true">
@@ -47,12 +47,25 @@ export default function FormRegister() {
         <input
           type="email"
           name="email"
-          className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2.5"
+          className="bg-white border border-[#CED4DA] hover:border-[#74C0FC] focus:border-[#74C0FC] outline-none transition-colors duration-300 text-[#6C757D] rounded-lg w-full p-2.5"
           placeholder="john.doe@me.com"
         />
         <div aria-live="polite" aria-atomic="true">
           <span className="text-sm text-red-500 mt-2">
-            {state?.error?.email}
+            {state?.error && (
+              <div
+                className="mb-4 text-sm text-red-500 rounded-lg"
+                role="alert"
+              >
+                {state.error.email && (
+                  <div>
+                    {state.error.email.map((msg, idx) => (
+                      <p key={idx}>{msg}</p>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </span>
         </div>
       </div>
@@ -66,12 +79,25 @@ export default function FormRegister() {
         <input
           type="password"
           name="password"
-          className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2.5"
+          className="bg-white border border-[#CED4DA] hover:border-[#74C0FC] focus:border-[#74C0FC] outline-none transition-colors duration-300 text-[#6C757D] rounded-lg w-full p-2.5"
           placeholder="**********"
         />
         <div aria-live="polite" aria-atomic="true">
           <span className="text-sm text-red-500 mt-2">
-            {state?.error?.password}
+          {state?.error && (
+              <div
+                className="mb-4 text-sm text-red-500 rounded-lg"
+                role="alert"
+              >
+                {state.error.password && (
+                  <div>
+                    {state.error.password.map((msg, idx) => (
+                      <p key={idx}>{msg}</p>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </span>
         </div>
       </div>
@@ -85,20 +111,33 @@ export default function FormRegister() {
         <input
           type="password"
           name="ConfirmPassword"
-          className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2.5"
+          className="bg-white border border-[#CED4DA] hover:border-[#74C0FC] focus:border-[#74C0FC] outline-none transition-colors duration-300 text-[#6C757D] rounded-lg w-full p-2.5"
           placeholder="**********"
         />
         <div aria-live="polite" aria-atomic="true">
           <span className="text-sm text-red-500 mt-2">
-            {state?.error?.ConfirmPassword}
+          {state?.error && (
+              <div
+                className="mb-4 text-sm text-red-500 rounded-lg"
+                role="alert"
+              >
+                {state.error.ConfirmPassword && (
+                  <div>
+                    {state.error.ConfirmPassword.map((msg, idx) => (
+                      <p key={idx}>{msg}</p>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </span>
         </div>
       </div>
       <RegisterButton />
-      <p className="text-sm font-light text-gray-500">
+      <p className="text-sm font-light text-[#495057]">
         Already have an account?
         <Link href={"/login"}>
-          <span className="font-medium pl-1 text-blue-600 hover:text-blue-700">
+          <span className="font-medium pl-1 text-[#007BFF] hover:text-[#0056b3]">
             Sign in
           </span>
         </Link>
