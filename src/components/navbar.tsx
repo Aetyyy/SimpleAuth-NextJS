@@ -8,14 +8,20 @@ export default async function Navbar() {
   return (
     <nav className="bg-navbar-light border-b border-navbar-border fixed w-full top-0">
       <div className="max-w-screen-xl flex items-center justify-between container mx-auto p-4">
-        <Link href={"/"}>
+        <Link href={"/"} className="flex items-center gap-3">
           <Image src={"/logo.jpg"} alt="logo" width={50} height={50} priority />
+          <h1 className="text-lg font-bold">Boren</h1>
         </Link>
         <div className="flex items-center gap-3">
-          <ul className="hidden md:flex items-center gap-4 mr-5 font-semibold text-navbar-text">
+          <ul className="hidden sm:flex items-center gap-4 mr-5 font-semibold text-navbar-text">
             <li>
               <Link href={"/"} className="hover:text-navbar-hover-text">
                 Home
+              </Link>
+            </li>
+            <li>
+              <Link href={"/"} className="hover:text-navbar-hover-text">
+                About
               </Link>
             </li>
             {session && (
@@ -49,6 +55,8 @@ export default async function Navbar() {
               </>
             )}
           </ul>
+        </div>
+        <div className="flex items-center gap-3">
           {session && (
             <div className="flex gap-3 items-center">
               <div className="flex flex-col justify-center -space-y-1">
@@ -70,7 +78,7 @@ export default async function Navbar() {
                   height={512}
                   priority
                   quality={100}
-                  className="w-10 h-10 rounded-full"
+                  className="max-w-10 h-10 rounded-full"
                 />
               </button>
             </div>
@@ -93,13 +101,13 @@ export default async function Navbar() {
             <>
               <Link
                 href={"/login"}
-                className="bg-button-light text-white px-4 py-2 rounded-md hover:bg-button-hover transition-colors duration-500"
+                className="hidden sm:block bg-button-light text-white px-4 py-2 rounded-md hover:bg-button-hover transition-colors duration-500"
               >
                 Login
               </Link>
               <Link
                 href={"/register"}
-                className="bg-[#0056b3] text-white px-4 py-2 rounded-md hover:bg-button-light transition-colors duration-500"
+                className="hidden sm:block bg-[#0056b3] text-white px-4 py-2 rounded-md hover:bg-button-light transition-colors duration-500"
               >
                 Register
               </Link>
